@@ -4,6 +4,7 @@ def encode(bit_vector):
     # Initialize variables
     count = 0
     compressed_res = ""
+    zero_occurences = []
     
     # Iterate through the bit vector
     for bit in bit_vector:
@@ -11,8 +12,9 @@ def encode(bit_vector):
             count += 1
         elif bit == "1":
             # occurence of 0's before a single one in binary
-            occur = bin(int(count))
-            
+            occur = bin(count)
+            zero_occurences.append(count)
+
             # length of the occurence of 0's
             # subsctracting 2 because every binary starts with '0b'
             length = len(occur)-2
@@ -23,6 +25,7 @@ def encode(bit_vector):
             compressed_res += unary + occur[2:]
             count = 0
 
+    print("Zero occurences:", zero_occurences)
     return compressed_res
 
 def decode(compressed_res):
